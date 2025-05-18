@@ -1,5 +1,6 @@
 package org.backend.controller;
 
+import jakarta.validation.Valid;
 import org.backend.dto.LabelDto;
 import org.backend.dto.LabelPersonalizationFullRequest;
 import org.backend.dto.LabelPersonalizationRequest;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * REST controller for label operations.
@@ -93,25 +96,33 @@ public class LabelController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+//    @PostMapping("/labels/personalize")
+//    public ResponseEntity<LabelResponse> updateLabelPersonalization(
+//            @RequestBody LabelPersonalizationFullRequest request) {
+//
+//        LabelDto updatedLabel = labelService.updateLabelPersonalization(
+//                request.getModuleName(),
+//                request.getTenantId(),
+//                request.getScreenName(),
+//                request.getLabelKey(),
+//                request.getPersonalizedName(),
+//                request.getUpdatedBy());
+//
+//        LabelResponse response = new LabelResponse(
+//                request.getModuleName(),
+//                request.getScreenName(),
+//                request.getTenantId(),
+//                updatedLabel
+//        );
+//
+//        return new ResponseEntity<>(response, HttpStatus.OK);
+//    }
+
+    //---- For list of labels ----
     @PostMapping("/labels/personalize")
-    public ResponseEntity<LabelResponse> updateLabelPersonalization(
-            @RequestBody LabelPersonalizationFullRequest request) {
-
-        LabelDto updatedLabel = labelService.updateLabelPersonalization(
-                request.getModuleName(),
-                request.getTenantId(),
-                request.getScreenName(),
-                request.getLabelKey(),
-                request.getPersonalizedName(),
-                request.getUpdatedBy());
-
-        LabelResponse response = new LabelResponse(
-                request.getModuleName(),
-                request.getScreenName(),
-                request.getTenantId(),
-                updatedLabel
-        );
-
+    public ResponseEntity<LabelResponse> updateLabelPersonalizations(
+            @RequestBody List<LabelPersonalizationFullRequest> requests) {
+        LabelResponse response = labelService.updateLabelPersonalizations(requests);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

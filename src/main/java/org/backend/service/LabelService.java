@@ -1,6 +1,7 @@
 package org.backend.service;
 
 import org.backend.dto.LabelDto;
+import org.backend.dto.LabelPersonalizationFullRequest;
 import org.backend.dto.LabelResponse;
 import org.backend.entity.Label;
 import org.backend.entity.LabelPersonalization;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -187,6 +189,35 @@ public class LabelService {
                 savedPersonalization.getPersonalizedName(),
                 label.getDefaultName()
         );
+    }
+    /**
+     * Updates or creates multiple label personalizations, creating missing entities if needed.
+     */
+    @Transactional
+    public LabelResponse updateLabelPersonalizations(List<LabelPersonalizationFullRequest> requests) {
+        List<LabelDto> updatedLabels = new ArrayList<>();
+        String moduleName = null;
+        String tenantId = null;
+        String screenName = null;
+
+        for (LabelPersonalizationFullRequest request : requests) {
+            LabelDto updatedLabel = updateLabelPersonalization(
+                    request.getModuleName(),
+                    request.getTenantId(),
+                    request.getScreenName(),
+                    request.getLabelKey(),
+                    request.getPersonalizedName(),
+                    request.getUpdatedBy()
+            );
+            updatedLabels.add(updatedLabel);
+
+            // Store moduleName, tenantId, screenName for response (assuming all requests share these or using the last one)
+            moduleName = request.getModuleName();
+            tenantId = request.getTenantId();
+            screenName = request.getScreenName();
+        }
+
+        return new LabelResponse(moduleName, screenName, tenantId, updatedLabels);
     }
 }
 
