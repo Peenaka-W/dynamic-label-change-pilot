@@ -1,0 +1,32 @@
+{
+  "leadGeneration": {
+    "tenant1": {
+      "lbl_residentType": { "id": "1", "key": "lbl_residentType", "name": "Resident Type", "defaultName": "Resident Type" },
+      "lbl_customerType": { "id": "2", "key": "lbl_customerType", "name": "Customer Type", "defaultName": "Customer Type" },
+      "lbl_nearestLocation": { "id": "3", "key": "lbl_nearestLocation", "name": "Nearest Branch", "defaultName": "Nearest Location" },
+      "lbl_prefferedLanguage": { "id": "4", "key": "lbl_prefferedLanguage", "name": "Preffered Language", "defaultName": "Preffered Language" }
+
+    },
+    "tenant2": {
+      "lbl_residentType": { "id": "1", "key": "lbl_residentType", "name": "Client Category", "defaultName": "Resident Type" },
+      "lbl_customerType": { "id": "2", "key": "lbl_customerType", "name": "User Type", "defaultName": "Customer Type" },
+      "lbl_nearestLocation": { "id": "3", "key": "lbl_nearestLocation", "name": "Closest Office", "defaultName": "Nearest Location" },
+      "lbl_prefferedLanguage": { "id": "4", "key": "lbl_prefferedLanguage", "name": "Language", "defaultName": "Preffered Language" }
+
+    }
+  },
+  "customerDetails": {
+    "tenant1": {
+      "lbl_title": { "id": "1", "key": "lbl_title", "name": "Title", "defaultName": "Title" },
+      "lbl_initials": { "id": "2", "key": "lbl_initials", "name": "Initials", "defaultName": "Initials" },
+      "lbl_fullName": { "id": "3", "key": "lbl_fullName", "name": "Full Name", "defaultName": "Full Name" }
+
+    },
+    "tenant2": {
+      "lbl_title": { "id": "1", "key": "lbl_title", "name": "Honorific", "defaultName": "Title" },
+      "lbl_initials": { "id": "2", "key": "lbl_initials", "name": "Name Initials", "defaultName": "Initials" },
+      "lbl_fullName": { "id": "3", "key": "lbl_fullName", "name": "Full Customer Name", "defaultName": "Full Name" }
+
+    }
+  }
+}
