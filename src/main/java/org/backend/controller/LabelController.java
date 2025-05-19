@@ -66,16 +66,46 @@ public class LabelController {
     }
 
     /**
-     * Update a label personalization using path variables and request body.
+     * Create or update a label personalization.
      *
      * @param moduleName the name of the module
      * @param tenantId the ID of the tenant
      * @param screenName the name of the screen
      * @param labelKey the key of the label
-     * @param request the personalization request
-     * @return ResponseEntity with the label response
+     * @param request the label personalization request
+     * @return ResponseEntity with the updated label response
      */
     @PostMapping("/{moduleName}/{tenantId}/{screenName}/labels/{labelKey}")
+    public ResponseEntity<LabelResponse> createOrUpdateLabelPersonalization(
+            @PathVariable String moduleName,
+            @PathVariable String tenantId,
+            @PathVariable String screenName,
+            @PathVariable String labelKey,
+            @RequestBody LabelPersonalizationRequest request) {
+
+        LabelDto updatedLabel = labelService.updateLabelPersonalization(
+                moduleName,
+                tenantId,
+                screenName,
+                labelKey,
+                request.getPersonalizedName(),
+                request.getUpdatedBy());
+
+        // Use the single LabelDto constructor
+        LabelResponse response = new LabelResponse(moduleName, screenName, tenantId, updatedLabel);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+    /**
+     * Update a label personalization.
+     *
+     * @param moduleName the name of the module
+     * @param tenantId the ID of the tenant
+     * @param screenName the name of the screen
+     * @param labelKey the key of the label
+     * @param request the label personalization request
+     * @return ResponseEntity with the updated label response
+     */
+    @PutMapping("/{moduleName}/{tenantId}/{screenName}/labels/{labelKey}")
     public ResponseEntity<LabelResponse> updateLabelPersonalization(
             @PathVariable String moduleName,
             @PathVariable String tenantId,
